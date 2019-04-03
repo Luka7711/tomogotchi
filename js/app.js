@@ -66,34 +66,48 @@ const game = {
               
 
                 // if hunger sleep boredom < 10
-                if(this.toma.hunger<10 || this.toma.sleepiness <10 ||this.toma.boredom <10){
+                // if(this.toma.hunger < 9 || this.toma.sleepiness <9 ||this.toma.boredom <9){
+                if(this.toma.hunger < 9 &&  this.timer % 5=== 0){
                     this.feedTom();
-                    this.sleep();
-                    this.play();
-
-                if(this.timer === 5){
-                    this.agingGener();
-
+                    // this.sleep();
+                    // this.play();
                 }
-
-                if(this.timer === 10){
-                    this.agingGener();
-                    this.changeBackImage1();
-                }
-
-                if(this.timer === 15){
-                    this.agingGener();
-                    this.changeBackImage2();
-                }
-
-
-            }else if(this.toma.hunger > 10 || this.toma.sleepiness > 10 ||this.toma.boredom > 10){
+                // if(this.toma.hunger > 10 || this.toma.sleepiness > 10 ||this.toma.boredom > 10){
+                  if(this.toma.hunger === 9){  
                     clearTimeout(this.intervalId);
                     $('.game_title').css('display', 'block');
                     $('.tomagotchi_image').css('background-image', 'url(https://emojis.slackmojis.com/emojis/images/1531847457/4230/blob-cry.gif?1531847457)');
                   
             
-            }
+                } if(this.toma.sleepiness < 9 && this.timer % 5 === 0 && this.timer % 3 === 0){
+                    this.sleep();
+
+                }
+
+                    if(this.toma.sleepiness === 9){
+                         clearTimeout(this.intervalId);
+                    $('.game_title').css('display', 'block');
+                    $('.tomagotchi_image').css('background-image', 'url(https://emojis.slackmojis.com/emojis/images/1531847457/4230/blob-cry.gif?1531847457)');
+
+                    }
+
+                if(this.timer === 10){
+                    this.agingGener();
+
+                }
+
+                if(this.timer === 20){
+                    this.agingGener();
+                    this.changeBackImage1();
+                }
+
+                if(this.timer === 30){
+                    this.agingGener();
+                    this.changeBackImage2();
+                }
+
+
+            
 
 
         }, 1000)
@@ -108,13 +122,13 @@ const game = {
     },
 
     sleep:function(){
-        this.toma.boredom++;
-        $('.bed').text(this.toma.boredom);
+        this.toma.sleepiness++;
+        $('.bed').text(this.toma.sleepiness);
     },
 
     play:function(){
-        this.toma.sleepiness++;
-        $('.amuse').text(this.toma.sleepiness);
+        this.toma.boredom++;
+        $('.amuse').text(this.toma.boredom);
     }
 
 }
