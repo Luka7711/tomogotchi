@@ -163,6 +163,8 @@ $('form').on('submit', (e)=>{
 
   $('ul').prepend($li);
 
+  $li.attr('class', 'myName');
+
   $($li).text(`Name: ${inputValue}`);
 
   $('form').css('display', 'none');
