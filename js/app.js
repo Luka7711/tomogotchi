@@ -2,102 +2,120 @@
 
 
 class Tomagoch {
-	constructor(age, hunger, boredom, sleepiness, name){
-		this.age = age;
-		this.hunger = hunger;
-		this.boredom = boredom;
-		this.sleepiness = sleepiness;
-		this.name = name;
+    constructor(age, hunger, boredom, sleepiness){
+        this.age = age;
+        this.hunger = hunger;
+        this.boredom = boredom;
+        this.sleepiness = sleepiness;
    }
 }
-
-// const toma = new Tomagoch(0, 0, 0)
-
 
 
 
 const game = {
-	
-	timer: 0,
+    
+    timer: 0,
 
-	toma: null,
+    toma: null,
 
- 	
- 	makeToma:function(nameOfTom){
- 		this.toma = new Tomagoch(0, 0, 0, 0, nameOfTom);
- 		this.start();
- 	},
+    deathpProbabilty:10,
+    
+    makeToma:function(){
+        this.toma = new Tomagoch(0, 0, 0, 0);
+        this.start();
+    },
 
- 	start:function(){
+    start:function(){
 
-		$li = $('<li/>');
+        $li = $('<li/>');     
+        $li.css({"font-style": "italic", "color": "orange"});
+        $('ul').prepend($li);
+        $('.start').css('display', 'none');
+        $('.tomagotchi_image').css('background-image', 'url(https://thumbs.gfycat.com/AfraidAlarmedHairstreak-max-1mb.gif)');
+        $('.btns').css('display', 'block');
 
-		$li.text('name: '+ this.toma.name);
-		
-		$li.css({"font-style": "italic", "color": "orange"});
-		$('ul').prepend($li);
-		$('.start').css('display', 'none');
-		$('.tomagotchi_image').css('background-image', 'url(https://thumbs.gfycat.com/AfraidAlarmedHairstreak-max-1mb.gif)');
-		$('.btns').css('display', 'block');
+        game.lifecycleTimer();
+    },
 
-		game.lifecycleTimer();
- 	},
+     changeBackImage1:function(){
 
-
- 	agingGener:function(){
- 		age+1;
- 	},
-
-	lifecycleTimer: function(){
-		console.log("lifecycleTimer was called")
-		// start the timerß
-
-		this.intervalId = setInterval(() => {
-			
-			this.timer++;
-			console.log(this.timer);
-			/// every three seconds 
-
-				// if hunger sleep boredom < 10
-				if(this.toma.hunger<10 || this.toma.sleepiness <10 ||this.toma.boredom <10){
-					this.feedTom();
-					this.sleep();
-					this.play();
-
-				if(this.timer <7 && this.timer >4){
-					
-					changeBackImage1();
-				
-				}else if(this.timer < 10 && this.timer >7){
-					changeBackImage2();
-				}
-
-			}else if(this.toma.hunger === 10 || this.toma.sleepiness === 10 ||this.toma.boredom === 10){
-					   clearTimeout(this.intervalId);
-					$('.game_title').css('display', 'block');
-				  
-			
-			}
-		}, 2000)
-		// timerId
-	},
+        $('.tomagotchi_image').css('background-image', 'url(https://media.tenor.com/images/948c6f9c0d34c7a84847599691ea9578/tenor.gif)');
+    },
 
 
-	//method to call to increment deathpProbabilty every time timer runs
-	feedTom:function(){
-		this.toma.hunger++;
-		$('.hunger').text(this.toma.hunger);
-	},
+    changeBackImage2:function(){
+    
+        $('.tomagotchi_image').css('background-image', 'url(https://media1.giphy.com/media/8TzKb1nVj0h1mxFmMa/giphy.gif)');
+    },
 
-	sleep:function(){
-		this.toma.boredom++;
-		$('.bed').text(this.toma.boredom);
-	},
 
-	play:function(){
-		this.toma.sleepiness++;
-		$('.amuse').text(this.toma.sleepiness);
-	}
+    agingGener:function(){
+        this.toma.age+=1;
+        $('.age').text(this.toma.age);
+    },
+
+    lifecycleTimer: function(){
+        console.log("lifecycleTimer was called");
+        // start the timerß
+
+        this.intervalId = setInterval(() => {
+            
+            this.timer++;
+            console.log(this.timer);
+            // / every three seconds 
+              
+
+                // if hunger sleep boredom < 10
+                if(this.toma.hunger<10 || this.toma.sleepiness <10 ||this.toma.boredom <10){
+                    this.feedTom();
+                    this.sleep();
+                    this.play();
+
+                if(this.timer === 5){
+                    this.agingGener();
+
+                }
+
+                if(this.timer === 10){
+                    this.agingGener();
+                    this.changeBackImage1();
+                }
+
+                if(this.timer === 15){
+                    this.agingGener();
+                    this.changeBackImage2();
+                }
+
+
+            }else if(this.toma.hunger > 10 || this.toma.sleepiness > 10 ||this.toma.boredom > 10){
+                    clearTimeout(this.intervalId);
+                    $('.game_title').css('display', 'block');
+                    $('.tomagotchi_image').css('background-image', 'url(https://emojis.slackmojis.com/emojis/images/1531847457/4230/blob-cry.gif?1531847457)');
+                  
+            
+            }
+
+
+        }, 1000)
+        // timerId
+    },
+
+
+    //method to call to increment deathpProbabilty every time timer runs
+    feedTom:function(){
+        this.toma.hunger++;
+        $('.hunger').text(this.toma.hunger);
+    },
+
+    sleep:function(){
+        this.toma.boredom++;
+        $('.bed').text(this.toma.boredom);
+    },
+
+    play:function(){
+        this.toma.sleepiness++;
+        $('.amuse').text(this.toma.sleepiness);
+    }
 
 }
 
@@ -106,67 +124,55 @@ const game = {
 
 
 
+$('form').on('submit', (e)=>{
+ //stop the page refresh
+ e.preventDefault();
 
-// $('form').on('submit', (e)=>{
-// 	//stop the page refresh
-// 	e.preventDefault();
+ console.log('form submitted');
 
-// 	console.log('form submitted');
+ //retrieving the value from the input
+  const inputValue = $('#input_name').val();
 
-// 	//retrieving the value from the input
-// 	const inputValue = $('#input-name').val();
 
-// 	$ul = $('ul');
+  $li = $('<li/>');
 
-// 	$ul.appen
+  $('ul').prepend($li);
 
-// 	//this setting value 
-// 	$('#input-name').val('');
-	
-// 	console.log(inputValue);
+  $($li).text(`Name: ${inputValue}`);
 
-// });
+  $('form').css('display', 'none');
+
+});
+
+
 
 
 $('.start').on('click', () => {
-	
-	let nameOfTom = prompt("name your tomagotchi");
-	game.makeToma(nameOfTom);
+    game.makeToma();
 });
 
 
 
 $('.feed').on('click', ()=>{
-	game.toma.hunger-=1;
-	$('.hunger').text(game.toma.hunger);
+    game.toma.hunger-=1;
+    $('.hunger').text(game.toma.hunger);
 });
 
 
 
 $('.sleep').on('click', ()=>{
-	game.toma.sleepiness-=1;
-	$('.bed').text(game.toma.sleepiness);
+    game.toma.sleepiness-=1;
+    $('.bed').text(game.toma.sleepiness);
 })
 
 
 
 $('.entertain').on('click', ()=>{
-	game.toma.boredom-=1;
-	$('.amuse').text(game.toma.boredom);
+    game.toma.boredom-=1;
+    $('.amuse').text(game.toma.boredom);
 })
 
 
-
-
-let changeBackImage1 = function(){
-
-	$('.tomagotchi_image').css('background-image', 'url(https://media.tenor.com/images/948c6f9c0d34c7a84847599691ea9578/tenor.gif)');
-}
-
-
-let changeBackImage2 =function(){
-	$('.tomagotchi_image').css('background-image', 'url(http://www.animatedimages.org/data/media/532/animated-chicken-image-0042.gif)');
-}
 
 
 
