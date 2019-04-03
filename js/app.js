@@ -54,6 +54,12 @@ const game = {
         $('.age').text(this.toma.age);
     },
 
+    stopGame:function(){
+        clearTimeout(this.intervalId);
+        $('.game_title').css('display', 'block');
+        $('.tomagotchi_image').css('background-image', 'url(https://emojis.slackmojis.com/emojis/images/1531847457/4230/blob-cry.gif?1531847457)');
+    },
+
     lifecycleTimer: function(){
         console.log("lifecycleTimer was called");
         // start the timerß
@@ -67,27 +73,32 @@ const game = {
 
                 // if hunger sleep boredom < 10
                 // if(this.toma.hunger < 9 || this.toma.sleepiness <9 ||this.toma.boredom <9){
-                if(this.toma.hunger < 9 &&  this.timer % 5=== 0){
+                if(this.toma.hunger < 10 &&  this.timer % 5=== 0){
                     this.feedTom();
-                    // this.sleep();
-                    // this.play();
+                   
                 }
                 // if(this.toma.hunger > 10 || this.toma.sleepiness > 10 ||this.toma.boredom > 10){
-                  if(this.toma.hunger === 9){  
-                    clearTimeout(this.intervalId);
-                    $('.game_title').css('display', 'block');
-                    $('.tomagotchi_image').css('background-image', 'url(https://emojis.slackmojis.com/emojis/images/1531847457/4230/blob-cry.gif?1531847457)');
+                  if(this.toma.hunger === 10){  
+                    this.stopGame();
                   
             
-                } if(this.toma.sleepiness < 9 && this.timer % 5 === 0 && this.timer % 3 === 0){
+                } if(this.toma.sleepiness < 10 && this.timer % 5 === 0 && this.timer % 3 === 0){
                     this.sleep();
 
                 }
 
-                    if(this.toma.sleepiness === 9){
-                         clearTimeout(this.intervalId);
-                    $('.game_title').css('display', 'block');
-                    $('.tomagotchi_image').css('background-image', 'url(https://emojis.slackmojis.com/emojis/images/1531847457/4230/blob-cry.gif?1531847457)');
+                    if(this.toma.sleepiness === 10){
+                        this.stopGame();
+
+                    }
+
+                    if(this.toma.boredom < 10 && this.timer % 3 === 0 && this.timer){
+
+                        this.play();
+                    }
+
+                    if(this.toma.boredom === 10){
+                        this.stopGame();
 
                     }
 
