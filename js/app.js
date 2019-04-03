@@ -121,7 +121,7 @@ const game = {
             
 
 
-        }, 1000)
+        }, 500)
         // timerId
     },
 
@@ -181,22 +181,29 @@ $('.start').on('click', () => {
 
 
 $('.feed').on('click', ()=>{
+    
+    if(game.toma.hunger >0 && game.toma.hunger < 10){
     game.toma.hunger-=1;
     $('.hunger').text(game.toma.hunger);
+  }
 });
 
 
 
 $('.sleep').on('click', ()=>{
+    if(game.toma.sleepiness > 0 && game.toma.hunger < 10){
     game.toma.sleepiness-=1;
     $('.bed').text(game.toma.sleepiness);
+  }
 })
 
 
 
 $('.entertain').on('click', ()=>{
+    if(game.toma.boredom > 0 && game.toma.boredom < 10){
     game.toma.boredom-=1;
     $('.amuse').text(game.toma.boredom);
+}
 })
 
 
