@@ -55,6 +55,7 @@ box-shadow: -3px 10px 39px 0px rgba(0,0,0,0.75);
 	margin:10px;
 	text-align:center;
 	cursor: pointer;
+	display: none;
 
 }
 
@@ -70,7 +71,8 @@ ul{
 
 li{
 	font-size:25px;
-
+	color:brown;
+	padding:10px;
 }
 
 
@@ -98,8 +100,12 @@ li{
 
 form{
 	position: absolute;
-	top:2%;
-	left:5%;
+	top:15%;
+	left:10%;
+}
+
+form input{
+	font-size: 20px;	
 }
 
 

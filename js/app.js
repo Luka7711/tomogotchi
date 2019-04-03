@@ -142,6 +142,8 @@ $('form').on('submit', (e)=>{
 
   $('form').css('display', 'none');
 
+  $('.start').css('display', 'block');
+
 });
 
 
